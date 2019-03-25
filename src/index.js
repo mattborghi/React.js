@@ -4,13 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { Header } from './Components/Header'
-import { Home } from './Components/Home'
+import { Header } from './Components/Header';
+import { Home } from './Components/Home';
+import { Events } from './Components/Events';
 
 class MyClass extends React.Component {
     render () {
         var user = {
-            hobbies: ['football'],
+            hobbies: ['football', 'swimming', 'violin'],
             age: 27
         };
         return(
@@ -29,6 +30,16 @@ class MyClass extends React.Component {
                         <Home name={"Matias"} user={user}/>
                         {/* Passing empty props to Home instead */}
                         {/* <Home/> */}
+                        <Home name={"Sth"} user={user}>
+                          <p>Paragraph passed through children method</p>
+                        </Home>
+                    </div>
+                </div>
+                {/* Another row when we test events */}
+                <div className="row">
+                    {/* Just add bootstrap stuff */}
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <Events name={"Matias"} initialAge={27}/>
                     </div>
                 </div>
             </div>
