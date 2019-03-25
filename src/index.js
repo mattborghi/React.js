@@ -9,6 +9,25 @@ import { Home } from './Components/Home';
 import { Events } from './Components/Events';
 
 class MyClass extends React.Component {
+    // Define the constructor in order to change the homeLink value to the Header
+    constructor() {
+        super();
+        this.state = {
+            homeLink: "Home"
+        };
+    }
+    
+    // I want to pass this function to a child component (Hello) 
+    onGreet() {
+        alert("Hello");
+    }
+
+    onChangeLinkName(newName) {
+        this.setState({
+            homeLink: newName
+        });
+    }
+
     render () {
         var user = {
             hobbies: ['football', 'swimming', 'violin'],
@@ -19,7 +38,7 @@ class MyClass extends React.Component {
                 <div className="row">
                     {/* Just add bootstrap stuff */}
                     <div className="col-xs-10 col-xs-offset-1">
-                        <Header/>
+                        <Header homeLink={this.state.homeLink}/>
                     </div>
                 </div>
                 <div className="row">
@@ -27,10 +46,13 @@ class MyClass extends React.Component {
                     <div className="col-xs-10 col-xs-offset-1">
                         {/* Passing name and user props to Home.
                         User is passed by defining the variable user above */}
-                        <Home name={"Matias"} user={user}/>
+                        <Home name={"Matias"} 
+                              user={user} 
+                              greet={this.onGreet}
+                              />
                         {/* Passing empty props to Home instead */}
                         {/* <Home/> */}
-                        <Home name={"Sth"} user={user}>
+                        <Home name={"Sth"} user={user} greet={this.onGreet}>
                           <p>Paragraph passed through children method</p>
                         </Home>
                     </div>
@@ -39,7 +61,12 @@ class MyClass extends React.Component {
                 <div className="row">
                     {/* Just add bootstrap stuff */}
                     <div className="col-xs-10 col-xs-offset-1">
-                        <Events name={"Matias"} initialAge={27}/>
+                        <Events 
+                            name={"Matias"} 
+                            initialAge={27}
+                            changeLink={(newName) => this.onChangeLinkName(newName)}
+                            initialLinkName = {this.state.homeLink}
+                        />
                     </div>
                 </div>
             </div>

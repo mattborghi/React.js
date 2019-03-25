@@ -18,6 +18,9 @@ export class Home extends React.Component {
                 <Home> and <Home/> tags. */}
                 <hr/>
                 {this.props.children}
+                {/* Button that calls a function that is defined in the parent method */}
+                <button className="btn btn-primary" onClick={this.props.greet}>Greet</button>
+                <hr/>
             </div>
         );
     }
@@ -27,5 +30,6 @@ export class Home extends React.Component {
 Home.propTypes = {
     name: PropTypes.string,
     user: PropTypes.object,
+    greet: PropTypes.func
     // children: PropTypes.element.isNotRequired
 };

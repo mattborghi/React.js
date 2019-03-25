@@ -13,7 +13,8 @@ export class Events extends React.Component {
             // But that is what we want, so to avoid confussion we can write instead
             age: props.initialAge,
             // We create another property just for completeness
-            status: 0
+            status: 0,
+            homeLink: props.initialLinkName
         };
         // Change the status value after 3sec
         setTimeout(() => {
@@ -33,6 +34,16 @@ export class Events extends React.Component {
         });
     }
 
+    onChangeLink() {
+        this.props.changeLink(this.state.homeLink);
+    }
+
+    onHandleChange(event) {
+        this.setState({
+            homeLink: event.target.value
+        });
+    }
+
     render () {
         return (
             <div>
@@ -44,6 +55,11 @@ export class Events extends React.Component {
                 1. this.onMakeOlder.bind(this): we use the bind(this) because this. referes to the instace that made the button click and the value will not be updated
                 2. the arrow function: () => this.onMakeOlder(), but in this case will not work either because the state will not have changed */}
                 <button className="btn btn-primary" onClick={() => this.onMakeOlder()}>Make me older!</button>
+                <hr/>
+                <input type="text" 
+                       value={this.state.homeLink} 
+                       onChange={(event) => this.onHandleChange(event)}/>
+                <button className="btn btn-primary" onClick={() => this.onChangeLink()}>Change Header Link</button>
             </div>
         );
     }
@@ -51,5 +67,6 @@ export class Events extends React.Component {
 
 Events.propTypes = {
     name: PropTypes.string,
-    initialAge: PropTypes.number
+    initialAge: PropTypes.number,
+    initialLinkName: PropTypes.string
 };
