@@ -13,7 +13,8 @@ class MyClass extends React.Component {
     constructor() {
         super();
         this.state = {
-            homeLink: "Home"
+            homeLink: "Home",
+            homeMounted: true
         };
     }
     
@@ -28,7 +29,26 @@ class MyClass extends React.Component {
         });
     }
 
+    onChangeHomeMounted() {
+        this.setState({
+            homeMounted: !this.state.homeMounted
+        });
+    }
+
     render () {
+        // Only render the event component if the state of homemounted is true
+        // The component can be changed by using a button
+        let homeCmp = "";
+        if (this.state.homeMounted) {
+            homeCmp = (
+                <Events 
+                    name={"Matias"} 
+                    initialAge={27}
+                    changeLink={(newName) => this.onChangeLinkName(newName)}
+                    initialLinkName = {this.state.homeLink}
+                />
+            );
+        }
         var user = {
             hobbies: ['football', 'swimming', 'violin'],
             age: 27
@@ -61,12 +81,13 @@ class MyClass extends React.Component {
                 <div className="row">
                     {/* Just add bootstrap stuff */}
                     <div className="col-xs-10 col-xs-offset-1">
-                        <Events 
-                            name={"Matias"} 
-                            initialAge={27}
-                            changeLink={(newName) => this.onChangeLinkName(newName)}
-                            initialLinkName = {this.state.homeLink}
-                        />
+                        {homeCmp}
+                    </div>
+                </div>
+                <div className="row">
+                    {/* Just add bootstrap stuff */}
+                    <div className="col-xs-10 col-xs-offset-1">
+                        <button className="btn btn-primary" onClick={() => this.onChangeHomeMounted()}>(Un)Mount Event Component</button>
                     </div>
                 </div>
             </div>
@@ -77,6 +98,7 @@ class MyClass extends React.Component {
 ReactDOM.render(<MyClass/>, window.document.getElementById('app'));
 
 ReactDOM.render(<App />, document.getElementById('root'));
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

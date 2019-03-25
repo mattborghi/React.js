@@ -12,7 +12,7 @@ export const Header = (props) => {
                 <div className="container">
                     <div className="navbar-header">
                         <ul className="nav navbar-nav">
-                            <li><a href="https://www.w3schools.com/html/default.asp">{props.homeLink}</a></li>
+                            <li><a href="http://www.google.com">{props.homeLink}</a></li>
                         </ul>
                     </div>
                 </div>
